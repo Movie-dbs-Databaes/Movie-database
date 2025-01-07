@@ -9,6 +9,7 @@ function App() {
   const [sortBy, setSortBy] = useState('alphabetically'); // State for sort option
   const [category, setCategory] = useState(''); // State for category
 
+ 
   // Handle movie search with category and search term
   const handleSearch = async (searchTerm) => {
     if (!searchTerm && !category) return;
@@ -27,6 +28,7 @@ function App() {
     } else {
       alert("No movies found.");
     }
+    
   };
 
   // Function to sort movies based on the selected option
@@ -59,18 +61,30 @@ function App() {
 
   return (
     <div className={`App ${isDarkMode ? 'dark-mode' : ''}`}>
-      <div className="video-background">
-        <video
-          className="background-video"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src="/videos/3190131-uhd_3840_2160_24fps.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+      {/* Conditional Background */}
+      {isDarkMode ? (
+        <div className="video-background">
+          <video
+            className="background-video"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src="/videos/3190131-uhd_3840_2160_24fps.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      ) : (
+        <div className="image-background">
+          <img
+            className="background-image"
+            src="/images/pexels-tuurt-812263.jpg"
+            alt="Background"
+          />
+        </div>
+      )}
+        
       <div className="search-container">
         <SearchBar onSearch={handleSearch} />
         <div className="dropdown-container">
@@ -80,9 +94,18 @@ function App() {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">Select Category</option>
+            <option value="Drama">Any</option>
             <option value="Action">Action</option>
+            <option value="Drama">Animated</option>
             <option value="Comedy">Comedy</option>
-            <option value="Drama">Drama</option>
+            <option value="Drama">Horror</option>
+            <option value="Drama">Romance</option>
+            <option value="Drama">Sci-Fi</option>
+            <option value="Drama">Fantasy</option>
+            <option value="Drama">Thriller</option>
+            <option value="Drama">Documentary</option>
+            <option value="Drama">Family</option>
+            <option value="Drama">Thriller</option>
             {/* Add more categories as needed */}
           </select>
           <select className="sort-dropdown" value={sortBy} onChange={handleSortChange}>
