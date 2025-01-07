@@ -1,58 +1,59 @@
 import React, { useState } from 'react';
+import './SearchBar.css'; // Assuming you have separate styles for the SearchBar
 
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [category, setCategory] = useState(''); // State for category selection
+  const [category, setCategory] = useState('');
 
-  // List of categories (genres)
+  // List of genres for the category dropdown
   const genres = [
-    'Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Sci-Fi', 'Fantasy', 'Thriller', 'Documentary', 'Family', 'Adventure'
+    'Action', 'Comedy', 'Drama', 'Horror', 'Romance',
+    'Sci-Fi', 'Fantasy', 'Thriller', 'Documentary', 'Family', 'Adventure',
   ];
 
-  // Handle Enter key press
+  // Handle search on Enter key
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      onSearch(searchTerm, category); // Trigger search with search term and category
+      onSearch(searchTerm, category); // Trigger search with current inputs
     }
   };
 
-  // Handle input change
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  // Handle category change
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
+  // Handle search button click
+  const handleSearchClick = () => {
+    onSearch(searchTerm, category); // Trigger search with current inputs
   };
 
   return (
     <div className="search-container">
       <h1>Search Movies</h1>
-      <h3></h3>
       <div className="search-bar">
+        {/* Search Input */}
         <input
           type="search"
           placeholder="Search for a movie..."
           value={searchTerm}
-          onChange={handleChange}
+          onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleKeyDown}
+          className="search-input"
         />
+
+        {/* Category Dropdown */}
         <select
           value={category}
-          onChange={handleCategoryChange}
+          onChange={(e) => setCategory(e.target.value)}
           className="category-dropdown"
         >
-          <option value="">Select Category</option>
+          <option value="" disabled>Select Category</option>
           {genres.map((genre) => (
-            <option key={genre} value={genre}>{genre}</option>
+            <option key={genre} value={genre}>
+              {genre}
+            </option>
           ))}
         </select>
-        <button
-          onClick={() => onSearch(searchTerm, category)}  // Trigger search when button is clicked
-          className="search-button"
-        >
+
+        {/* Search Button */}
+        <button onClick={handleSearchClick} className="search-button">
           Search
         </button>
       </div>
