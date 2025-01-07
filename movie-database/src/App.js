@@ -5,29 +5,33 @@ import { useState } from 'react';
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
 
   // Handle movie search with category and search term
   const handleSearch = async (searchTerm, category) => {
     if (!searchTerm && !category) return;
 
-    // Prepare API URL based on the search term and category
     let url = `https://www.omdbapi.com/?apikey=your_api_key&s=${searchTerm}`;
     if (category) {
-      url += `&genre=${category}`;  // Add genre filter if a category is selected
+      url += `&genre=${category}`;
     }
 
     const response = await fetch(url);
     const data = await response.json();
     
     if (data.Response === "True") {
-      setMovies(data.Search); // Set movie data in the state
+      setMovies(data.Search);
     } else {
       alert("No movies found.");
     }
   };
 
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
-    <div className="App">
+    <div className={`App ${isDarkMode ? 'dark-mode' : ''}`}>
       <div className="video-background">
         <video
           className="background-video"
@@ -42,6 +46,9 @@ function App() {
       </div>
       <SearchBar onSearch={handleSearch} />
       <MovieList movies={movies} />
+      <button className="theme-toggle" onClick={toggleTheme}>
+        {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      </button>
     </div>
   );
 }
