@@ -5,6 +5,7 @@ import MovieDetails from './components/MovieDetails';
 import './App.css';
 
 function App() {
+
   return (
     <Router>
       <div className="App">
