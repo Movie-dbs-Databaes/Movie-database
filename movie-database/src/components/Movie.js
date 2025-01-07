@@ -4,7 +4,7 @@ import MovieList from './MovieList';
 
 function Movie() {
   const [movieList, setMovieList] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); //xxx
   const [category, setCategory] = useState('');
 
   const getMovies = (query = '', genre = '') => {
