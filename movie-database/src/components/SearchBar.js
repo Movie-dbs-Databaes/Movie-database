@@ -5,27 +5,27 @@ const SearchBar = ({ onSearch }) => {
   const [category, setCategory] = useState('');
 
   const genres = [
-    'Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Sci-Fi', 'Fantasy', 'Thriller', 'Documentary', 'Family', 'Adventure'
+    { id: 28, name: 'Action' }, { id: 35, name: 'Comedy' }, { id: 18, name: 'Drama' }, { id: 27, name: 'Horror' },
+    { id: 10749, name: 'Romance' }, { id: 878, name: 'Sci-Fi' },{ id: 14, name: 'Fantasy' },{ id: 53, name: 'Thriller' },
+    { id: 99, name: 'Documentary' }, { id: 10751, name: 'Family' }, { id: 12, name: 'Adventure' }
   ];
-
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       onSearch(searchTerm, category);
     }
   };
-
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
   const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
+    const selectedCategory = event.target.value;
+    setCategory(selectedCategory);
+    onSearch(searchTerm, selectedCategory);
   };
-
   return (
     <div className="search-container">
-      <h1>Search for Movies</h1>
+      <h1>Search Movies</h1>
       <div className="search-bar">
         <input
           type="search"
@@ -41,7 +41,7 @@ const SearchBar = ({ onSearch }) => {
         >
           <option value="">Select Category</option>
           {genres.map((genre) => (
-            <option key={genre} value={genre}>{genre}</option>
+            <option key={genre.id} value={genre.id}>{genre.name}</option>
           ))}
         </select>
         <button
