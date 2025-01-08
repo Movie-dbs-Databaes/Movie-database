@@ -23,7 +23,7 @@
 
 /* Video background */
 .video-background {
-  position: absolute;
+  position:fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -40,7 +40,7 @@
 
 /* Image background for light mode */
 .image-background {
-  position: absolute;
+  position:fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -102,13 +102,13 @@
 }
 
 .search-button {
-  background-color: #007bff;
+  background-color: #8b7f67;
   color: white;
   border: none;
 }
 
 .search-button:hover {
-  background-color: #0056b3;
+  background-color: #8795a3;
 }
 
 .search-container .dropdown-container {
@@ -127,7 +127,7 @@
 }
 
 .movie-card {
-  background-color: white;
+  background-color:  rgba(206, 202, 192, 0.9);
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

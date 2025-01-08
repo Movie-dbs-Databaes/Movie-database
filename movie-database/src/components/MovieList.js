@@ -16,7 +16,7 @@ const MovieList = ({ movies }) => {
           </div>
         ))
       ) : (
-        <p>No movies found</p>
+        <p></p>
       )}
     </div>
   );
