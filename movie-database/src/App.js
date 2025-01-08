@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Movie from './components/Movie';
 import MovieDetails from './components/MovieDetails';
-
+import { FaMoon, FaSun } from 'react-icons/fa';
 import MovieList from './components/MovieList';
 import './App.css';
 
@@ -49,9 +49,9 @@ function App() {
   };
 
   // Toggle dark mode theme
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  // const toggleTheme = () => {
+  //   setIsDarkMode(!isDarkMode);
+  // };
 
   // Handle sort option change
   const handleSortChange = (event) => {
@@ -59,6 +59,15 @@ function App() {
     const sortedMovies = sortMovies(movies);
     setMovies(sortedMovies);
   };
+
+  // const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    document.body.classList.toggle('dark-mode', !isDarkMode);
+  };
+
+
 
   return (
     <Router>
@@ -87,14 +96,13 @@ function App() {
           </div>
         )}
 
-        {/* Theme Toggle Button */}
-        <button className="theme-toggle" onClick={toggleTheme}>
-          <img
-            
-            alt="Light/Dark mode"
-            className="theme-icon"
-          />
-        </button>
+  
+<div className={`app-container ${isDarkMode ? 'dark-mode' : ''}`}>
+      <button className="theme-toggle" onClick={toggleTheme}>
+        {isDarkMode ? <FaSun size={24} /> : <FaMoon size={24} />}
+      </button>
+      {/* Other components */}
+    </div> 
 
         {/* Search Bar and Movie List */}
         

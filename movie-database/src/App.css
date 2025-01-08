@@ -185,3 +185,26 @@
     width: 100%;
   }
 }
+
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.theme-icon {
+  width: 30px;
+  height: 30px;
+  color: #f4f4f4; /* Adjust the color if necessary */
+}
+
+/* Additional styles for icons when active, if needed */
+.theme-toggle:hover .theme-icon {
+  opacity: 0.8;
+}
