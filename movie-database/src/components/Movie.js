@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import SearchBar from './SearchBar';
 import MovieList from './MovieList';
 
-function Movie() {
+function Movie({ showSplash }) {
   const [movieList, setMovieList] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
-  const [showSplash, setShowSplash] = useState(true); // Splash text state
 
   const getMovies = (query = '', genre = '') => {
     const apiKey = 'e9398896e43eb1802e8c35d2e38e536c';
@@ -27,7 +26,6 @@ function Movie() {
   };
 
   useEffect(() => {
-    // Load movies when splash is hidden
     if (!showSplash) {
       getMovies();
     }
@@ -38,12 +36,6 @@ function Movie() {
     setCategory(genre);
     getMovies(query, genre);
   };
-
-  useEffect(() => {
-    // Show splash for 3 seconds, then hide
-    const splashTimeout = setTimeout(() => setShowSplash(false), 3000);
-    return () => clearTimeout(splashTimeout); // Cleanup timeout
-  }, []);
 
   return (
     <div>
