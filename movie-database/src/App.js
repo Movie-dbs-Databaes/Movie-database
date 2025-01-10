@@ -1,73 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Movie from './components/Movie';
 import MovieDetails from './components/MovieDetails';
-import { FaMoon, FaSun } from 'react-icons/fa';
-import MovieList from './components/MovieList';
 import './App.css';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
-  const [sortBy, setSortBy] = useState('alphabetically'); // State for sort option
-  const [category, setCategory] = useState(''); // State for category
+  const [showSplash, setShowSplash] = useState(true); // Global splash state
 
-  // Handle movie search with category and search term
-  const handleSearch = async (searchTerm) => {
-    if (!searchTerm && !category) return;
-
-    let url = `https://www.omdbapi.com/?apikey=your_api_key&s=${searchTerm}`;
-    if (category) {
-      url += `&genre=${category}`;
-    }
-
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if (data.Response === "True") {
-      const sortedMovies = sortMovies(data.Search); // Sort movies before setting state
-      setMovies(sortedMovies);
-    } else {
-      alert("No movies found.");
-    }
-  };
-
-  // Function to sort movies based on the selected option
-  const sortMovies = (movies) => {
-    switch (sortBy) {
-      case 'alphabetically':
-        return movies.sort((a, b) => a.Title.localeCompare(b.Title));
-      case 'rating':
-        return movies.sort((a, b) => parseFloat(b.imdbRating) - parseFloat(a.imdbRating));
-      case 'length':
-        return movies.sort((a, b) => parseInt(b.Runtime) - parseInt(a.Runtime));
-      case 'releaseDate':
-        return movies.sort((a, b) => new Date(b.Year) - new Date(a.Year));
-      default:
-        return movies;
-    }
-  };
-
-  // Toggle dark mode theme
-  // const toggleTheme = () => {
-  //   setIsDarkMode(!isDarkMode);
-  // };
-
-  // Handle sort option change
-  const handleSortChange = (event) => {
-    setSortBy(event.target.value);
-    const sortedMovies = sortMovies(movies);
-    setMovies(sortedMovies);
-  };
-
-  // const [isDarkMode, setIsDarkMode] = useState(false);
+  useEffect(() => {
+    const splashTimeout = setTimeout(() => setShowSplash(false), 3000);
+    return () => clearTimeout(splashTimeout); // Cleanup timeout
+  }, []);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
     document.body.classList.toggle('dark-mode', !isDarkMode);
   };
-
-
 
   return (
     <Router>
@@ -96,21 +47,18 @@ function App() {
           </div>
         )}
 
-  
-<div className={`app-container ${isDarkMode ? 'dark-mode' : ''}`}>
-      <button className="theme-toggle" onClick={toggleTheme}>
-        {isDarkMode ? <FaSun size={24} /> : <FaMoon size={24} />}
-      </button>
-      {/* Other components */}
-    </div> 
-
-        {/* Search Bar and Movie List */}
-        
-        <MovieList movies={movies} />
+        <div className={`app-container ${isDarkMode ? 'dark-mode' : ''}`}>
+          <button className="theme-toggle" onClick={toggleTheme}>
+            {isDarkMode ? <FaSun size={24} /> : <FaMoon size={24} />}
+          </button>
+        </div>
 
         {/* Routes */}
         <Routes>
-          <Route path="/" element={<Movie />} />
+          <Route
+            path="/"
+            element={<Movie showSplash={showSplash} />} // Pass splash state as prop
+          />
           <Route path="/movie/:id" element={<MovieDetails />} />
         </Routes>
       </div>
