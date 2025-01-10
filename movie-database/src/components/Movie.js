@@ -4,8 +4,9 @@ import MovieList from './MovieList';
 
 function Movie() {
   const [movieList, setMovieList] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(''); //xxx
+  const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
+  const [showSplash, setShowSplash] = useState(true); // Splash text state
 
   const getMovies = (query = '', genre = '') => {
     const apiKey = 'e9398896e43eb1802e8c35d2e38e536c';
@@ -21,12 +22,16 @@ function Movie() {
 
     fetch(url)
       .then((res) => res.json())
-      .then((json) => setMovieList(json.results));
+      .then((json) => setMovieList(json.results))
+      .catch((err) => console.error('Error fetching movies:', err));
   };
 
   useEffect(() => {
-    getMovies();
-  }, []);
+    // Load movies when splash is hidden
+    if (!showSplash) {
+      getMovies();
+    }
+  }, [showSplash]);
 
   const handleSearch = (query, genre) => {
     setSearchTerm(query);
@@ -34,10 +39,24 @@ function Movie() {
     getMovies(query, genre);
   };
 
+  useEffect(() => {
+    // Show splash for 3 seconds, then hide
+    const splashTimeout = setTimeout(() => setShowSplash(false), 3000);
+    return () => clearTimeout(splashTimeout); // Cleanup timeout
+  }, []);
+
   return (
     <div>
-      <SearchBar onSearch={handleSearch} />
-      <MovieList movies={movieList} />
+      {showSplash ? (
+        <div className="splash-overlay">
+          <h1 className="splash-title">DataBaes</h1>
+        </div>
+      ) : (
+        <>
+          <SearchBar onSearch={handleSearch} />
+          <MovieList movies={movieList} />
+        </>
+      )}
     </div>
   );
 }
