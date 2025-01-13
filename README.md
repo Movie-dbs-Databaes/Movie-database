@@ -63,6 +63,7 @@ The app should be running at http://localhost:3000.
 ├── README.md
 └── package.json
 
+
 Movie.js: The main component that handles search and fetching movies.
 MovieList.js: Renders the list of movies and handles hover interactions to display trailers.
 MovieDetails.js: Displays detailed information about a specific movie.
