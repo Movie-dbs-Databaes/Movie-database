@@ -1,70 +1,81 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Movie Database Project 🎬
+### Overview
+This project is a Movie Database built with React that allows users to search for movies by title and filter by genre. Users can also view detailed information about each movie, including trailers, posters, release date, and ratings. The project utilizes The Movie Database (TMDB) API to fetch movie data and display it dynamically.
 
-## Available Scripts
+### Features
+🔍 Search Functionality: Users can search for movies by title.
+🎥 Movie Trailers: Hover over a movie poster to play the trailer automatically.
+🎬 Movie Details: Click on a movie to view detailed information including the poster, overview, release date, and rating.
+📋 Category Filtering: Filter movies by genre.
+📱 Responsive Design: Works on all screen sizes.
 
-In the project directory, you can run:
+### Tech Stack
+React: Frontend framework
+TMDB API: For fetching movie data
+React Router: For navigation between movie list and movie details
+CSS: For styling and responsive design 
 
-### `npm start`
+### Installation and Setup Instructions
+To get started with the project, follow these steps:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Clone the repository
+bash
+Copy code
+git clone https://github.com/Movie-dbs-Databaes/Movie-database.git
+cd movie-database
+2. Install dependencies
+Make sure you have Node.js installed on your machine. Then, install the required dependencies:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+bash
+Copy code
+npm install
+3. Obtain an API key
+Sign up on The Movie Database (TMDB) and generate an API key.
 
-### `npm test`
+4. Set up environment variables
+Create a .env file in the root of the project and add your TMDB API key:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+bash
+Copy code
+REACT_APP_TMDB_API_KEY=your_api_key_here
+5. Run the application
+After setting up the API key, start the application:
 
-### `npm run build`
+bash
+Copy code
+npm start
+The app should be running at http://localhost:3000.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+.
+├── public
+│   └── index.html
+├── src
+│   ├── components
+│   │   ├── Movie.js
+│   │   ├── MovieDetails.js
+│   │   ├── MovieList.js
+│   │   └── SearchBar.js
+│   ├── App.js
+│   └── index.js
+├── README.md
+└── package.json
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Movie.js: The main component that handles search and fetching movies.
+MovieList.js: Renders the list of movies and handles hover interactions to display trailers.
+MovieDetails.js: Displays detailed information about a specific movie.
+SearchBar.js: Contains the search input and genre filter.
 
-### `npm run eject`
+### How it Works
+Search: The user can type a movie title in the search bar, which triggers a request to TMDB's search API.
+Movie Hover: When a user hovers over a movie poster, the trailer automatically plays in an embedded iframe.
+Movie Details: Clicking on a movie takes the user to a detailed view of the movie.
+API Usage
+This project uses The Movie Database (TMDB) API to fetch movies, trailers, and other information. You can explore more about their API here.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Future Enhancements
+Add a pagination feature for searching through more movies.
+Implement user ratings and the ability to save favorite movies.
+Add related movies suggestions on the movie details page.
