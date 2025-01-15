@@ -58,7 +58,7 @@ const SearchBar = ({ onSearch }) => {
           <option value="">Select Category</option>
           {genres.map((genre) => (
             <option key={genre.id} value={genre.id}>{genre.name}</option>
-          ))}
+          ))};
         </select>
       </div>
     </div>
