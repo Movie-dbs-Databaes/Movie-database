@@ -6,7 +6,7 @@ const SearchBar = ({ onSearch }) => {
 
   const genres = [
     { id: 28, name: 'Action' }, { id: 35, name: 'Comedy' }, { id: 18, name: 'Drama' }, { id: 27, name: 'Horror' },
-    { id: 10749, name: 'Romance' }, { id: 878, name: 'Sci-Fi' }, { id: 14, name: 'Fantasy' }, { id: 53, name: 'Thriller' },
+    { id: 10749, name: 'Romance' }, { id: 878, name: 'Sci-Fi' },{ id: 14, name: 'Fantasy' },{ id: 53, name: 'Thriller' },
     { id: 99, name: 'Documentary' }, { id: 10751, name: 'Family' }, { id: 12, name: 'Adventure' }
   ];
 
@@ -14,6 +14,7 @@ const SearchBar = ({ onSearch }) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       onSearch(searchTerm, category);
+      setSearchTerm('');
     }
   };
 
@@ -27,25 +28,28 @@ const SearchBar = ({ onSearch }) => {
     onSearch(searchTerm, selectedCategory);
   };
 
+  const handleSearchClick = () => {
+    onSearch(searchTerm, category);
+    setSearchTerm('');
+  };
+
   return (
     <div className="search-container">
       <h1>Search Movies</h1>
       <div className="search-bar">
-        <div className="search-input-container">
-          <input
-            type="search"
-            placeholder="Search for a movie..."
-            value={searchTerm}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
-          />
-          <button
-            onClick={() => onSearch(searchTerm, category)}
-            className="search-button"
-          >
-            Search
-          </button>
-        </div>
+        <input
+          type="search"
+          placeholder="Search for a movie..."
+          value={searchTerm}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
+        <button
+          onClick={handleSearchClick}
+          className="search-button"
+        >
+          Search
+        </button>
         <select
           value={category}
           onChange={handleCategoryChange}
