@@ -29,7 +29,7 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <div className="search-container">
-      <h1>Search Movies</h1>
+      <h1>DataBaes</h1>
       <div className="search-bar">
         <div className="search-input-container">
           <input
