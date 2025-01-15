@@ -1,9 +1,12 @@
+
+
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import './MovieDetails.css'; 
 
 const MovieDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate(); // useNavigate hook for navigation
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [relatedMovies, setRelatedMovies] = useState([]);
@@ -39,22 +42,25 @@ const MovieDetails = () => {
     setActiveTab(tab);
   };
 
- 
   const handleWatchClick = () => {
     const watchLink = `https://www.youtube.com/results?search_query=${movie.title}+trailer`;
     window.open(watchLink, '_blank');
   };
 
-
   const handleDownloadClick = () => {
- 
     alert('Download functionality is not available. You can watch the movie on streaming platforms.');
+  };
 
+  const handleBackClick = () => {
+    navigate('/'); // Navigate back to the home page
   };
 
   return (
     <div className="movie-details">
       <div className="movie-header">
+        <button className="back-to-home-btn" onClick={handleBackClick}>
+          &#8592; {/* Left arrow symbol */}
+        </button>
 
         <div className="movie-poster">
           <img
@@ -63,7 +69,6 @@ const MovieDetails = () => {
             className="poster-image"
           />
         </div>
-
 
         <div className="movie-info">
           <h2 className="movie-title">{movie.title}</h2>
@@ -74,18 +79,16 @@ const MovieDetails = () => {
             <strong>Release Date:</strong> {movie.release_date}
           </div>
 
-      
           <div className="movie-actions">
-          <button className="watch-btn"   onClick={handleWatchClick} >
+            <button className="watch-btn" onClick={handleWatchClick}>
               <i className="fas fa-play"></i> Watch
             </button>
-            <button className="download-btn" onClick={handleDownloadClick} >
+            <button className="download-btn" onClick={handleDownloadClick}>
               <i className="fas fa-download"></i> Download
             </button>
           </div>
         </div>
       </div>
-
 
       <div className="tabs">
         <button
@@ -164,5 +167,3 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
-
-
